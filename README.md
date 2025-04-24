@@ -1,2 +1,3 @@
-# GpuFluidSimulator
- 
+# Final project of GPUs
+
+> Author: Laura Wang Qiu
