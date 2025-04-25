@@ -1,4 +1,4 @@
-#include "Loop.h"
+﻿#include "Loop.h"
 #include "defs.h"
 #include "kernel.cuh"
 #include <string>
@@ -26,6 +26,13 @@ Loop::Loop()
     backgroundCol.b = 0;
     backgroundCol.a = 255;
 
+    // Particles Mass
+    particleMass = 1.0f;
+    // Particles Density
+    particleDensity = 1000.0f;
+    // Particles Pressure
+    particlePressure = 0.0f;
+
     // Particles Color
     particleCol.r = 255;
     particleCol.g = 255;
@@ -38,7 +45,13 @@ Loop::Loop()
     brushSize = 2;
 
     // Forces constants
-    forces.gravityParams.gravityForce = 9.8f;
+    forces.damping = DAMPING;
+    forces.gravityParams.gravityForce = GRAVITY * METERS_TO_PIXELS;
+    forces.collisionParams.restitution = RESTITUTION;
+    forces.sphParams.h = H;
+    forces.sphParams.k = K;
+    forces.sphParams.restDensity = REST_DENSITY;
+    forces.sphParams.viscosity = VISCOSITY;
 }
 
 Loop::~Loop() {
@@ -119,6 +132,13 @@ void Loop::handleEvents() {
     while (SDL_PollEvent(&event) != 0) {
         ImGui_ImplSDL2_ProcessEvent(&event);
 
+        ImGuiIO& io = ImGui::GetIO();
+        if ((io.WantCaptureMouse &&
+             (event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_MOUSEBUTTONUP || event.type == SDL_MOUSEMOTION)) ||
+            (io.WantCaptureKeyboard && (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP))) {
+            continue;
+        }
+
         switch (event.type) {
         case SDL_WINDOWEVENT:
             switch (event.window.event) {
@@ -167,6 +187,12 @@ void Loop::handleEvents() {
 }
 
 void Loop::update() {
+    for (auto& p : particles) {
+        if (p.timeLeft != PARTICLES_MAX_TIME) {
+            p.timeLeft -= deltaTime;
+        }
+    }
+
     if (isLeftClickMousePressed) {
         Particle p;
         p.posX = lastMouseX;
@@ -174,6 +200,8 @@ void Loop::update() {
         p.velX = 0.0f;
         p.velY = 0.0f;
         p.radius = brushSize / 2;
+        p.mass = particleMass;
+        p.density = particleDensity;
         p.color = particleCol;
         p.timeLeft = particleTimeLeft;
 
@@ -190,15 +218,15 @@ void Loop::update() {
         }
     }
 
-    updateParticles_kernels(particles.data(), (int)particles.size(), deltaTime, windowWidth, windowHeight,
-                            forces, lastMouseX, lastMouseY);
+    updateParticles_kernels(particles.data(), (int)particles.size(), deltaTime, windowWidth, windowHeight, forces,
+                            lastMouseX, lastMouseY);
 }
 
 void Loop::refresh() {
     particles.erase(std::remove_if(particles.begin(), particles.end(),
                                    [this](const Particle& p) {
-                                       return p.timeLeft <= 0 || p.posX < 0 || p.posX >= windowWidth || p.posY < 0 ||
-                                           p.posY >= windowHeight;
+                                       return (p.timeLeft <= 0 && p.timeLeft != PARTICLES_MAX_TIME) || p.posX < 0 ||
+                                           p.posX >= windowWidth || p.posY < 0 || p.posY >= windowHeight;
                                    }),
                     particles.end());
 }
@@ -241,8 +269,6 @@ void Loop::renderSimulation() {
 }
 
 void Loop::renderInterface() {
-    //ImGui::ShowDemoWindow();
-
     ImGui::SetNextWindowPos(ImVec2((float)windowWidth - windowWidth / 4, 0), ImGuiCond_Always);
     ImGui::SetNextWindowSize(ImVec2((float)windowWidth / 4, (float)windowHeight), ImGuiCond_Always);
 
@@ -250,44 +276,78 @@ void Loop::renderInterface() {
     ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
     ImGui::PushTextWrapPos();
 
-    ImGui::Text("Background Color");
-    static float color[4] = {backgroundCol.r / 255.0f, backgroundCol.g / 255.0f, backgroundCol.b / 255.0f,
-                             backgroundCol.a / 255.0f};
-    if (ImGui::ColorPicker4("Color ", color)) {
-        backgroundCol.r = static_cast<Uint8>(color[0] * 255);
-        backgroundCol.g = static_cast<Uint8>(color[1] * 255);
-        backgroundCol.b = static_cast<Uint8>(color[2] * 255);
-        backgroundCol.a = static_cast<Uint8>(color[3] * 255);
+    if (ImGui::Button("Clear")) {
+        particles.clear();
     }
 
-    ImGui::Separator();
-
-    ImGui::Text("Particles Color");
-    static float pColor[4] = {particleCol.r / 255.0f, particleCol.g / 255.0f, particleCol.b / 255.0f,
-                              particleCol.a / 255.0f};
-    if (ImGui::ColorPicker4("Color", pColor)) {
-        particleCol.r = static_cast<Uint8>(pColor[0] * 255);
-        particleCol.g = static_cast<Uint8>(pColor[1] * 255);
-        particleCol.b = static_cast<Uint8>(pColor[2] * 255);
-        particleCol.a = static_cast<Uint8>(pColor[3] * 255);
+    if (ImGui::CollapsingHeader("General Settings")) {
+        ImGui::Text("Background Color");
+        static float color[4] = {backgroundCol.r / 255.0f, backgroundCol.g / 255.0f, backgroundCol.b / 255.0f,
+                                 backgroundCol.a / 255.0f};
+        if (ImGui::ColorPicker4("Color ", color)) {
+            backgroundCol.r = static_cast<Uint8>(color[0] * 255);
+            backgroundCol.g = static_cast<Uint8>(color[1] * 255);
+            backgroundCol.b = static_cast<Uint8>(color[2] * 255);
+            backgroundCol.a = static_cast<Uint8>(color[3] * 255);
+        }
     }
 
-    ImGui::Separator();
+    if (ImGui::CollapsingHeader("Particle Settings")) {
+        ImGui::Text("Particles Color");
+        static float pColor[4] = {particleCol.r / 255.0f, particleCol.g / 255.0f, particleCol.b / 255.0f,
+                                  particleCol.a / 255.0f};
+        if (ImGui::ColorPicker4("Color", pColor)) {
+            particleCol.r = static_cast<Uint8>(pColor[0] * 255);
+            particleCol.g = static_cast<Uint8>(pColor[1] * 255);
+            particleCol.b = static_cast<Uint8>(pColor[2] * 255);
+            particleCol.a = static_cast<Uint8>(pColor[3] * 255);
+        }
 
-    ImGui::Text("Brush Size");
-    ImGui::SliderInt(" ", &brushSize, 2, 50, "%d");
+        ImGui::Separator();
 
-    ImGui::Separator();
+        ImGui::Text("Brush Size");
+        ImGui::SliderInt("  ", &brushSize, 2, 50, "%d");
 
-    ImGui::Text("Particle Lifetime");
-    ImGui::SliderFloat("  ", &particleTimeLeft, 0.1f, 1000, "%.1f seconds");
+        ImGui::Separator();
 
-    ImGui::Separator();
+        ImGui::Text("Particle Lifetime");
+        ImGui::SliderFloat(" ", &particleTimeLeft, 0.1f, PARTICLES_MAX_TIME, "%.1f seconds");
+        if (particleTimeLeft == PARTICLES_MAX_TIME) {
+            ImGui::SameLine();
+            ImGui::Text("inf");
+        }
+    }
 
-    ImGui::Text("Gravity Force");
-    ImGui::SliderFloat("   ", &forces.gravityParams.gravityForce, -1000.0f, 1000.0f, "%.1f m/s2");
+    if (ImGui::CollapsingHeader("Gravity Params")) {
+        ImGui::Text("Gravity Force");
+        ImGui::SliderFloat("   ", &forces.gravityParams.gravityForce, MIN_GRAVITY * METERS_TO_PIXELS, MAX_GRAVITY * METERS_TO_PIXELS, "%.1f pixels/s2");
+    }
+
+    if (ImGui::CollapsingHeader("Collision Params")) {
+        ImGui::Text("Restitution");
+        ImGui::SliderFloat("    ", &forces.collisionParams.restitution, MIN_RESTITUTION, MAX_RESTITUTION, "%.1f");
+    }
+
+    if (ImGui::CollapsingHeader("SPH Params")) {
+        ImGui::Text("Smoothing radius");
+        ImGui::SliderFloat("     ", &forces.sphParams.h, SPH_MIN_H, SPH_MAX_H, "%.3f");
+
+        ImGui::Separator();
+
+        ImGui::Text("Stiffness");
+        ImGui::SliderFloat("       ", &forces.sphParams.k, SPH_MIN_K, SPH_MAX_K, "%.3f");
+
+        ImGui::Separator();
+
+        ImGui::Text("Rest Density");
+        ImGui::SliderFloat("      ", &forces.sphParams.restDensity, SPH_MIN_REST_DENSITY, SPH_MAX_REST_DENSITY, "%.3f");
+
+        ImGui::Separator();
+
+        ImGui::Text("Viscosity");
+        ImGui::SliderFloat("        ", &forces.sphParams.viscosity, SPH_MIN_VISCOSITY, SPH_MAX_VISCOSITY, "%.3f");
+    }
 
     ImGui::PopTextWrapPos();
-
     ImGui::End();
 }

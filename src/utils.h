@@ -16,6 +16,9 @@ struct Particle {
     float posX, posY;   // position
     float velX, velY;   // velocity
     float radius;       // radius
+    float mass;         // mass
+    float density;      // density
+    float pressure;     // pressure
     Color color;        // color
     float timeLeft;     // time left until disappear
 };
@@ -28,9 +31,29 @@ struct GravityParams {
 };
 
 /**
+* @brief Structure to store collision parameters
+*/
+struct CollisionParams {
+    float restitution;
+};
+
+/**
+* @brief Structure to store SPH parameters
+*/
+struct SPHParams {
+    float h;            // smoothing radius
+    float k;            // stiffness
+    float restDensity;
+    float viscosity;
+};
+
+/**
 * @brief Structure to store different forces information
 */
 struct Forces {
+    float damping;
     GravityParams gravityParams;
+    CollisionParams collisionParams;
+    SPHParams sphParams;
     // ...
 };
