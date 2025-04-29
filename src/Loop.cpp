@@ -360,27 +360,27 @@ void Loop::renderInterface() {
     ImGui::End();
 }
 
-#define MAX_PARTICLES_SEA 600 // Adjust this value depending on your GPU
+#define MAX_PARTICLES_SEA 4000 // Adjust this value depending on your GPU
 
 void Loop::generateParticleSea() {
     particles.clear();
 
-    float spacing = brushSize + 1.0f;
-    int columns = static_cast<int>(windowWidth / spacing);
-    int maxRows = static_cast<int>((windowHeight / 5.0f) / spacing);
+    float diameter = (float)brushSize;
+    int columns = static_cast<int>(windowWidth / diameter);
+    int maxRows = static_cast<int>((windowHeight / 5.0f) / diameter);
 
     int rows = std::min(maxRows, MAX_PARTICLES_SEA / columns);
 
-    float startX = spacing / 2.0f;
-    float startY = windowHeight - rows * spacing;
+    float startX = diameter / 2.0f;
+    float startY = (windowHeight - rows * diameter) / 2.0f;
 
     for (int y = 0; y < rows; ++y) {
         for (int x = 0; x < columns; ++x) {
             if ((int)particles.size() >= MAX_PARTICLES_SEA) break;
 
             Particle p;
-            p.posX = startX + x * spacing;
-            p.posY = startY + y * spacing;
+            p.posX = startX + x * diameter;
+            p.posY = startY + y * diameter;
             p.velX = 0.0f;
             p.velY = 0.0f;
             p.radius = brushSize / 2.0f;
