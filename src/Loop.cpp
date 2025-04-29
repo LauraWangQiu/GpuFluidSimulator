@@ -261,7 +261,7 @@ void Loop::renderSimulation() {
             for (int x = (int)-it->radius; x <= (int)it->radius; ++x) {
                 int radiusSquared = it->radius * it->radius;
                 if (x * x + y * y <= radiusSquared) {
-                    SDL_RenderDrawPoint(renderer, (int)it->posX + x, (int)it->posY + y);
+                    SDL_RenderDrawPointF(renderer, it->posX + x, it->posY + y);
                 }
             }
         }
@@ -276,8 +276,16 @@ void Loop::renderInterface() {
     ImGui::Begin("Settings", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
     ImGui::PushTextWrapPos();
 
+    ImGui::Text("Particles: %d", (int)particles.size());
+    ImGui::Text("FPS: %.1f", 1.0f / deltaTime);
+    ImGui::Separator();
+
     if (ImGui::Button("Clear")) {
         particles.clear();
+    }
+
+    if (ImGui::Button("Generate Particle Sea")) {
+        generateParticleSea();
     }
 
     if (ImGui::CollapsingHeader("General Settings")) {
@@ -350,4 +358,38 @@ void Loop::renderInterface() {
 
     ImGui::PopTextWrapPos();
     ImGui::End();
+}
+
+#define MAX_PARTICLES_SEA 600 // Adjust this value depending on your GPU
+
+void Loop::generateParticleSea() {
+    particles.clear();
+
+    float spacing = brushSize + 1.0f;
+    int columns = static_cast<int>(windowWidth / spacing);
+    int maxRows = static_cast<int>((windowHeight / 5.0f) / spacing);
+
+    int rows = std::min(maxRows, MAX_PARTICLES_SEA / columns);
+
+    float startX = spacing / 2.0f;
+    float startY = windowHeight - rows * spacing;
+
+    for (int y = 0; y < rows; ++y) {
+        for (int x = 0; x < columns; ++x) {
+            if ((int)particles.size() >= MAX_PARTICLES_SEA) break;
+
+            Particle p;
+            p.posX = startX + x * spacing;
+            p.posY = startY + y * spacing;
+            p.velX = 0.0f;
+            p.velY = 0.0f;
+            p.radius = brushSize / 2.0f;
+            p.mass = particleMass;
+            p.density = particleDensity;
+            p.color = particleCol;
+            p.timeLeft = PARTICLES_MAX_TIME;
+
+            particles.push_back(p);
+        }
+    }
 }

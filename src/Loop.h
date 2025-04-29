@@ -59,7 +59,7 @@ private:
     const float RESTITUTION = 0.8f;
     const float H = 0.1f;
     const float K = 0.0f;
-    const float REST_DENSITY = 0.0f;
+    const float REST_DENSITY = 1000.0f;
     const float VISCOSITY = 0.0f;
     const float PARTICLES_MIN_RESTITUTION = 1.0f;
     const float PARTICLES_MAX_RESTITUTION = 0.0f;
@@ -67,14 +67,14 @@ private:
     const int PARTICLES_MAX_TIME = 10;
     const float MIN_GRAVITY = -20.0f;
     const float MAX_GRAVITY = 20.0f;
-    const float MIN_RESTITUTION = 0.0f;
+    const float MIN_RESTITUTION = 0.0f; // No rebound
     const float MAX_RESTITUTION = 1.0f;
     const float SPH_MIN_H = 0.1f;
-    const float SPH_MAX_H = 10.0f;
+    const float SPH_MAX_H = 1.0f;
     const float SPH_MIN_K = 0.0f;
-    const float SPH_MAX_K = 100.0f;
+    const float SPH_MAX_K = 25.0f;
     const float SPH_MIN_REST_DENSITY = 0.0f;
-    const float SPH_MAX_REST_DENSITY = 0.1f;
+    const float SPH_MAX_REST_DENSITY = 1000.0f;
     const float SPH_MIN_VISCOSITY = 0.0f;
     const float SPH_MAX_VISCOSITY = 0.1f;
 
@@ -99,6 +99,11 @@ private:
     * @brief Renders interface
     */
     void renderInterface();
+
+    /**
+    * @brief Generates a grid of particles
+    */
+    void generateParticleSea();
 
 public:
     /**
