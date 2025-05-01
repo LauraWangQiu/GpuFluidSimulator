@@ -44,8 +44,7 @@ __device__ float2 spikyGradient(float dx, float dy, float r, float h) {
     return make_float2(factor * dx / r, factor * dy / r);
 }
 
-__global__ void computePressureViscosityForces(Particle* particles, int numParticles, float deltaTime, float h,
-                                               float viscosity) {
+__global__ void computePressureViscosityForces(Particle* particles, int numParticles, float h, float viscosity) {
     int i = blockIdx.x * blockDim.x + threadIdx.x;
     if (i >= numParticles) return;
 
@@ -78,10 +77,8 @@ __global__ void computePressureViscosityForces(Particle* particles, int numParti
         }
     }
 
-    if (p_i.density > 1e-5f) {
-        p_i.velX += (fx / p_i.density) * deltaTime;
-        p_i.velY += (fy / p_i.density) * deltaTime;
-    }
+    p_i.velX += (fx / p_i.density);
+    p_i.velY += (fy / p_i.density);
 }
 
 __global__ void applyGravityForce(Particle* particles, int numParticles, float deltaTime, float gravityForce) {
@@ -192,7 +189,7 @@ void updateParticles_kernels(Particle* particles, int numParticles, float deltaT
             d_particles, numParticles, forces.sphParams.restDensity, forces.sphParams.h, forces.sphParams.k);
 
         computePressureViscosityForces<<<blocksPerGrid, threadsPerBlock>>>(
-            d_particles, numParticles, subDeltaTime, forces.sphParams.h, forces.sphParams.viscosity);
+            d_particles, numParticles, forces.sphParams.h, forces.sphParams.viscosity);
 
         applyGravityForce<<<blocksPerGrid, threadsPerBlock>>>(d_particles, numParticles, subDeltaTime,
                                                               forces.gravityParams.gravityForce);

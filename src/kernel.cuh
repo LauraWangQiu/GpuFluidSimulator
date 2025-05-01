@@ -8,8 +8,7 @@ __global__ void computeDensityPressure(Particle* particles, int numParticles, fl
 
 __device__ float2 spikyGradient(float dx, float dy, float r, float h);
 
-__global__ void computePressureViscosityForces(Particle* particles, int numParticles, float deltaTime, float h,
-                                               float viscosity);
+__global__ void computePressureViscosityForces(Particle* particles, int numParticles, float h, float viscosity);
 
 __global__ void applyGravityForce(Particle* particles, int numParticles, float deltaTime, float gravityForce);
 

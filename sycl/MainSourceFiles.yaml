@@ -1,0 +1,637 @@
+---
+MainSourceFile:  'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\MainSrcFiles_placehold'
+Replacements:
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\Loop.cpp'
+    Offset:          3
+    Length:          0
+    ReplacementText: "#include <sycl/sycl.hpp>\r\n#include <dpct/dpct.hpp>\r\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\Loop.cpp'
+    Offset:          39
+    Length:          21
+    ReplacementText: '#include "kernel.dp.hpp"'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\Loop.cpp'
+    Offset:          205
+    Length:          26
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          3
+    Length:          21
+    ReplacementText: "#include <sycl/sycl.hpp>\r\n#include <dpct/dpct.hpp>\r\n#include \"kernel.dp.hpp\""
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          117
+    Length:          11
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          387
+    Length:          11
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          500
+    Length:          0
+    ReplacementText: ",\r\n                            const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          516
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          529
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          542
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          1045
+    Length:          24
+    ReplacementText: 'sycl::sqrt(dx * dx + dy * dy)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          1336
+    Length:          11
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          1347
+    Length:          6
+    ReplacementText: 'sycl::float2'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          1485
+    Length:          45
+    ReplacementText: 'sycl::float2(factor * dx / r, factor * dy / r)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          1535
+    Length:          11
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          1645
+    Length:          0
+    ReplacementText: ",\r\n                                    const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          1661
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          1674
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          1687
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          2082
+    Length:          24
+    ReplacementText: 'sycl::sqrt(dx * dx + dy * dy)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          2185
+    Length:          6
+    ReplacementText: 'sycl::float2'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          2360
+    Length:          6
+    ReplacementText: 'grad.x()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          2413
+    Length:          6
+    ReplacementText: 'grad.y()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          2892
+    Length:          11
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          3000
+    Length:          0
+    ReplacementText: ",\r\n                       const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          3016
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          3029
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          3042
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          3291
+    Length:          11
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          3446
+    Length:          0
+    ReplacementText: ', const sycl::nd_item<3> &item_ct1'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          3462
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          3475
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          3488
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          4639
+    Length:          22
+    ReplacementText: 'sycl::sqrt(distanceSquared)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          5510
+    Length:          11
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          5591
+    Length:          0
+    ReplacementText: ', const sycl::nd_item<3> &item_ct1'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          5607
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          5620
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          5633
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          5960
+    Length:          0
+    ReplacementText: "\r\n    dpct::device_ext &dev_ct1 = dpct::get_current_device();\r\n    sycl::queue &q_ct1 = dev_ct1.in_order_queue();"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          6055
+    Length:          91
+    ReplacementText: 'q_ct1.memcpy(d_particles, particles, numParticles * sizeof(Particle)).wait()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          6511
+    Length:          0
+    ReplacementText: "        /*\r\n        DPCT1049:0: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.\r\n        */\r\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          6519
+    Length:          168
+    ReplacementText: "q_ct1.parallel_for(\r\n          sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock), sycl::range<3>(1, 1, threadsPerBlock)), \r\n          [=](sycl::nd_item<3> item_ct1) {\r\n            computeDensityPressure(d_particles, numParticles, forces.sphParams.restDensity, forces.sphParams.h, forces.sphParams.k, item_ct1);\r\n          });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          6687
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          6690
+    Length:          0
+    ReplacementText: "        /*\r\n        DPCT1049:1: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.\r\n        */\r\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          6698
+    Length:          154
+    ReplacementText: "q_ct1.parallel_for(\r\n          sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock), sycl::range<3>(1, 1, threadsPerBlock)), \r\n          [=](sycl::nd_item<3> item_ct1) {\r\n            computePressureViscosityForces(d_particles, numParticles, forces.sphParams.h, forces.sphParams.viscosity, item_ct1);\r\n          });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          6852
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          6855
+    Length:          0
+    ReplacementText: "        /*\r\n        DPCT1049:2: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.\r\n        */\r\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          6863
+    Length:          191
+    ReplacementText: "q_ct1.parallel_for(\r\n          sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock), sycl::range<3>(1, 1, threadsPerBlock)), \r\n          [=](sycl::nd_item<3> item_ct1) {\r\n            applyGravityForce(d_particles, numParticles, subDeltaTime, forces.gravityParams.gravityForce, item_ct1);\r\n          });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          7054
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          7057
+    Length:          0
+    ReplacementText: "        /*\r\n        DPCT1049:3: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.\r\n        */\r\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          7065
+    Length:          91
+    ReplacementText: "q_ct1.parallel_for(\r\n          sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock), sycl::range<3>(1, 1, threadsPerBlock)), \r\n          [=](sycl::nd_item<3> item_ct1) {\r\n            applyDamping(d_particles, numParticles, forces.damping, item_ct1);\r\n          });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          7156
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          7197
+    Length:          0
+    ReplacementText: "            /*\r\n            DPCT1049:4: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.\r\n            */\r\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          7209
+    Length:          205
+    ReplacementText: "q_ct1.parallel_for(\r\n              sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock), sycl::range<3>(1, 1, threadsPerBlock)), \r\n              [=](sycl::nd_item<3> item_ct1) {\r\n                applyCollisions(d_particles, numParticles, windowWidth, windowHeight, forces.collisionParams.restitution, item_ct1);\r\n              });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          7414
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          7437
+    Length:          91
+    ReplacementText: 'q_ct1.memcpy(particles, d_particles, numParticles * sizeof(Particle)).wait()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Offset:          7534
+    Length:          21
+    ReplacementText: 'dpct::dpct_free(d_particles, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\main.cpp'
+    Offset:          0
+    Length:          26
+    ReplacementText: "#include <sycl/sycl.hpp>\r\n#include <dpct/dpct.hpp>\r\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\main.cpp'
+    Offset:          26
+    Length:          38
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\main.cpp'
+    Offset:          103
+    Length:          21
+    ReplacementText: '#include "kernel.dp.hpp"'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+MainSourceFilesDigest:
+  - MainSourceFile:  'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\Loop.cpp'
+    Digest:          266dd72ece157c4090812a6700b320be
+    HasCUDASyntax:   true
+  - MainSourceFile:  'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu'
+    Digest:          1950179f42e7f03fe3e288aad90763af
+    HasCUDASyntax:   true
+  - MainSourceFile:  'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\main.cpp'
+    Digest:          489f73891a7fc7da81ac1cba862b0c88
+    HasCUDASyntax:   true
+DpctVersion:     2025.1.0
+MainHelperFileName: ''
+USMLevel:        ''
+FeatureMap:      {}
+CompileTargets:  {}
+OptionMap:
+  AnalysisScopePath:
+    Value:           ''
+    ValueVec:
+      - 'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator'
+    Specified:       false
+  AsyncHandler:
+    Value:           'false'
+    Specified:       false
+  BuildScript:
+    Value:           '0'
+    Specified:       false
+  CodePinEnabled:
+    Value:           'false'
+    Specified:       false
+  CommentsEnabled:
+    Value:           'false'
+    Specified:       false
+  CompilationsDir:
+    Value:           'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator'
+    Specified:       false
+  CtadEnabled:
+    Value:           'false'
+    Specified:       false
+  EnablepProfiling:
+    Value:           'false'
+    Specified:       false
+  ExperimentalFlag:
+    Value:           '0'
+    Specified:       false
+  ExplicitNamespace:
+    Value:           '20'
+    Specified:       false
+  ExtensionDDFlag:
+    Value:           '0'
+    Specified:       false
+  ExtensionDEFlag:
+    Value:           '4294967295'
+    Specified:       false
+  HelperFuncPreferenceFlag:
+    Value:           '0'
+    Specified:       false
+  NDRangeDim:
+    Value:           '3'
+    Specified:       false
+  NoDRYPattern:
+    Value:           'false'
+    Specified:       false
+  OptimizeMigration:
+    Value:           'false'
+    Specified:       false
+  ProcessAll:
+    Value:           'false'
+    Specified:       false
+  RuleFile:
+    Value:           ''
+    Specified:       false
+  SyclNamedLambda:
+    Value:           'false'
+    Specified:       false
+  UseSYCLCompat:
+    Value:           'false'
+    Specified:       false
+  UsmLevel:
+    Value:           '1'
+    Specified:       false
+  VcxprojFile:
+    Value:           'C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\project.vcxproj'
+    Specified:       true
+...

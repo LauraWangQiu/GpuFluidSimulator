@@ -1,0 +1,52 @@
+[
+    {
+        "file":"dependencies/imgui-1.90.8/backends/imgui_impl_sdl2.cpp",
+        "command":"ClCompile -m64 -DNDEBUG -DWIN32 -DWIN64 -D_CONSOLE -D_DEBUG \"dependencies/imgui-1.90.8/backends/imgui_impl_sdl2.cpp\"",
+        "directory":"C:/Users/lwq20/OneDrive/Documentos/GitHub/GpuFluidSimulator"
+    },
+    {
+        "file":"dependencies/imgui-1.90.8/backends/imgui_impl_sdlrenderer2.cpp",
+        "command":"ClCompile -m64 -DNDEBUG -DWIN32 -DWIN64 -D_CONSOLE -D_DEBUG \"dependencies/imgui-1.90.8/backends/imgui_impl_sdlrenderer2.cpp\"",
+        "directory":"C:/Users/lwq20/OneDrive/Documentos/GitHub/GpuFluidSimulator"
+    },
+    {
+        "file":"dependencies/imgui-1.90.8/imgui.cpp",
+        "command":"ClCompile -m64 -DNDEBUG -DWIN32 -DWIN64 -D_CONSOLE -D_DEBUG \"dependencies/imgui-1.90.8/imgui.cpp\"",
+        "directory":"C:/Users/lwq20/OneDrive/Documentos/GitHub/GpuFluidSimulator"
+    },
+    {
+        "file":"dependencies/imgui-1.90.8/imgui_demo.cpp",
+        "command":"ClCompile -m64 -DNDEBUG -DWIN32 -DWIN64 -D_CONSOLE -D_DEBUG \"dependencies/imgui-1.90.8/imgui_demo.cpp\"",
+        "directory":"C:/Users/lwq20/OneDrive/Documentos/GitHub/GpuFluidSimulator"
+    },
+    {
+        "file":"dependencies/imgui-1.90.8/imgui_draw.cpp",
+        "command":"ClCompile -m64 -DNDEBUG -DWIN32 -DWIN64 -D_CONSOLE -D_DEBUG \"dependencies/imgui-1.90.8/imgui_draw.cpp\"",
+        "directory":"C:/Users/lwq20/OneDrive/Documentos/GitHub/GpuFluidSimulator"
+    },
+    {
+        "file":"dependencies/imgui-1.90.8/imgui_tables.cpp",
+        "command":"ClCompile -m64 -DNDEBUG -DWIN32 -DWIN64 -D_CONSOLE -D_DEBUG \"dependencies/imgui-1.90.8/imgui_tables.cpp\"",
+        "directory":"C:/Users/lwq20/OneDrive/Documentos/GitHub/GpuFluidSimulator"
+    },
+    {
+        "file":"dependencies/imgui-1.90.8/imgui_widgets.cpp",
+        "command":"ClCompile -m64 -DNDEBUG -DWIN32 -DWIN64 -D_CONSOLE -D_DEBUG \"dependencies/imgui-1.90.8/imgui_widgets.cpp\"",
+        "directory":"C:/Users/lwq20/OneDrive/Documentos/GitHub/GpuFluidSimulator"
+    },
+    {
+        "file":"src/Loop.cpp",
+        "command":"ClCompile -m64 -DNDEBUG -DWIN32 -DWIN64 -D_CONSOLE -D_DEBUG \"src/Loop.cpp\"",
+        "directory":"C:/Users/lwq20/OneDrive/Documentos/GitHub/GpuFluidSimulator"
+    },
+    {
+        "file":"src/main.cpp",
+        "command":"ClCompile -m64 -DNDEBUG -DWIN32 -DWIN64 -D_CONSOLE -D_DEBUG \"src/main.cpp\"",
+        "directory":"C:/Users/lwq20/OneDrive/Documentos/GitHub/GpuFluidSimulator"
+    },
+    {
+        "file":"src/kernel.cu",
+        "command":"CudaCompile -m64 -DNDEBUG -DWIN32 -DWIN64 -D_CONSOLE -D_DEBUG \"src/kernel.cu\"",
+        "directory":"C:/Users/lwq20/OneDrive/Documentos/GitHub/GpuFluidSimulator"
+    }
+]

@@ -1,13 +1,14 @@
-﻿#include "Loop.h"
+﻿#include <sycl/sycl.hpp>
+#include <dpct/dpct.hpp>
+#include "Loop.h"
 #include "defs.h"
-#include "kernel.cuh"
+#include "kernel.dp.hpp"
 #include <string>
 #include <SDL.h>
 #include <SDL_render.h>
 #include <imgui.h>
 #include <imgui_impl_sdl2.h>
 #include <imgui_impl_sdlrenderer2.h>
-#include <cuda_runtime.h>
 using namespace std;
 
 Loop::Loop()

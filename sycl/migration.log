@@ -1,0 +1,92 @@
+C:\Program Files (x86)\Intel\oneAPI\dpcpp-ct\2025.1\bin\dpct.exe  --in-root="C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator" --vcxprojfile="C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\project.vcxproj" --out-root="C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\sycl"
+C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\backends\imgui_impl_sdlrenderer2.cpp:31:10: fatal error: 'imgui.h' file not found
+   31 | #include "imgui.h"
+      |          ^~~~~~~~~
+In file included from C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\Loop.cpp:1:
+In file included from C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\Loop.h:2:
+C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\utils.h:2:10: fatal error: 'SDL_stdinc.h' file not found
+    2 | #include <SDL_stdinc.h>
+      |          ^~~~~~~~~~~~~~
+warning: CUDA version 12.8 is only partially supported [-Wunknown-cuda-version]
+In file included from C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu:1:
+In file included from C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cuh:3:
+C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\utils.h:2:10: fatal error: 'SDL_stdinc.h' file not found
+    2 | #include <SDL_stdinc.h>
+      |          ^~~~~~~~~~~~~~
+In file included from C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\main.cpp:3:
+In file included from C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\Loop.h:2:
+C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\utils.h:2:10: fatal error: 'SDL_stdinc.h' file not found
+    2 | #include <SDL_stdinc.h>
+      |          ^~~~~~~~~~~~~~
+C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu:188:9: warning: DPCT1049:0: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.
+  188 |         computeDensityPressure<<<blocksPerGrid, threadsPerBlock>>>(
+      |         ^
+C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu:191:9: warning: DPCT1049:1: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.
+  191 |         computePressureViscosityForces<<<blocksPerGrid, threadsPerBlock>>>(
+      |         ^
+C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu:194:9: warning: DPCT1049:2: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.
+  194 |         applyGravityForce<<<blocksPerGrid, threadsPerBlock>>>(d_particles, numParticles, subDeltaTime,
+      |         ^
+C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu:197:9: warning: DPCT1049:3: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.
+  197 |         applyDamping<<<blocksPerGrid, threadsPerBlock>>>(d_particles, numParticles, forces.damping);
+      |         ^
+C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu:200:13: warning: DPCT1049:4: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.
+  200 |             applyCollisions<<<blocksPerGrid, threadsPerBlock>>>(d_particles, numParticles, windowWidth, windowHeight,
+      |             ^
+C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\backends\imgui_impl_sdl2.cpp:80:10: fatal error: 'imgui.h' file not found
+   80 | #include "imgui.h"
+      |          ^~~~~~~~~
+C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\backends\imgui_impl_sdl2.cpp:80:10: fatal error: 'imgui.h' file not found
+   80 | #include "imgui.h"
+      |          ^~~~~~~~~
+Saved new version of C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\sycl\dependencies\imgui-1.90.8\imstb_rectpack.h.yaml file
+Saved new version of C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\sycl\dependencies\imgui-1.90.8\imstb_textedit.h.yaml file
+Saved new version of C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\sycl\dependencies\imgui-1.90.8\imstb_truetype.h.yaml file
+Saved new version of C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\sycl\src\kernel.dp.hpp.yaml file
+
+Cannot evaluate variable in  "-I\"$(CudaToolkitIncludeDir)\" "
+Cannot evaluate variable in  "-I\"$(SolutionDir)dependencies/SDL2-2.30.4/include/\" "
+Cannot evaluate variable in  "-I\"$(SolutionDir)dependencies/imgui-1.90.8/\" "
+Cannot evaluate variable in  "-I\"$(SolutionDir)dependencies/imgui-1.90.8/backends/\" "
+Cannot evaluate variable in  "-I\"$(SolutionDir)dependencies/imgui-1.90.8/misc/cpp/\" "
+Cannot evaluate variable in  "-I\"$(SolutionDir)dependencies/imgui-1.90.8/misc/fonts/\" "
+Cannot evaluate variable in  "-I\"$(SolutionDir)dependencies/imgui-1.90.8/misc/freetype/\" "
+Cannot evaluate variable in  "-I\"$(SolutionDir)dependencies/imgui-1.90.8/misc/single_file/\" "
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\backends\imgui_impl_sdlrenderer2.cpp
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\Loop.cpp
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_demo.cpp
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_tables.cpp
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\main.cpp
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_draw.cpp
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui.cpp
+Analyzing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\backends\imgui_impl_sdlrenderer2.cpp
+Analyzing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\Loop.cpp
+Analyzing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_demo.cpp
+Analyzing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu
+Analyzing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_tables.cpp
+Analyzing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\main.cpp
+Analyzing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_draw.cpp
+Analyzing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui.cpp
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_widgets.cpp
+Analyzing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_widgets.cpp
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\backends\imgui_impl_sdl2.cpp
+Analyzing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\backends\imgui_impl_sdl2.cpp
+Migrating: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\backends\imgui_impl_sdlrenderer2.cpp
+Migrating: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\Loop.cpp
+Migrating: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_demo.cpp
+Migrating: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\kernel.cu
+Migrating: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_tables.cpp
+Migrating: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\src\main.cpp
+Migrating: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_draw.cpp
+Migrating: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui.cpp
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_widgets.cpp
+Migrating: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\imgui_widgets.cpp
+Parsing: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\backends\imgui_impl_sdl2.cpp
+Migrating: C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator\dependencies\imgui-1.90.8\backends\imgui_impl_sdl2.cpp
+Processed 7 file(s) in -in-root folder "C:\Users\lwq20\OneDrive\Documentos\GitHub\GpuFluidSimulator"
+
+See Diagnostics Reference to resolve warnings and complete the migration:
+https://www.intel.com/content/www/us/en/docs/dpcpp-compatibility-tool/developer-guide-reference/current/diagnostics-reference.html
+
+
