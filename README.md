@@ -4,7 +4,7 @@
 
 ## About
 
-> [!IMPORTANT] IMPORTANT: To try it out you will need a NVIDIA GPU!
+> [!IMPORTANT] To try it out you will need a NVIDIA GPU!
 
 Enjoy this 2D particles simulation made in C++ with CUDA. You can change parameters to visualize the behavior of the particles depending on the applied forces:
 
