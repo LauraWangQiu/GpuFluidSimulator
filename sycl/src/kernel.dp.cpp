@@ -174,27 +174,96 @@ void applyDamping(Particle* particles, int numParticles, float damping, const sy
     p.velX *= damping;
     p.velY *= damping;
 }
+//
+//void updateParticles_kernels(Particle* particles, int numParticles, float deltaTime, int windowWidth, int windowHeight,
+//                             Forces forces, int lastMouseX, int lastMouseY) {
+//    if (!particles || numParticles <= 0) return;
+// 
+//    sycl::queue q_ct1(sycl::gpu_selector_v);
+//    Particle* d_particles = sycl::malloc_device<Particle>(numParticles, q_ct1);
+//    if (!d_particles) {
+//        throw std::runtime_error("Error assigning memory in device.");
+//    }
+//    q_ct1.memcpy(d_particles, particles, numParticles * sizeof(Particle)).wait();
+//
+//    auto maxWorkGroupSize = q_ct1.get_device().get_info<sycl::info::device::max_work_group_size>();
+//    int threadsPerBlock = std::min(256, static_cast<int>(maxWorkGroupSize));
+//    int blocksPerGrid = (numParticles + threadsPerBlock - 1) / threadsPerBlock;
+//   
+//
+//    float maxStep = 0.035f;
+//    int substeps = (int)ceil(deltaTime / maxStep);
+//    float subDeltaTime = deltaTime / substeps;
+//
+//    for (int step = 0; step < substeps; ++step) {
+//        // https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics
+//        q_ct1.parallel_for(
+//            sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock),
+//                              sycl::range<3>(1, 1, threadsPerBlock)),
+//            [=](sycl::nd_item<3> item_ct1) {
+//                computeDensityPressure(d_particles, numParticles, forces.sphParams.restDensity, forces.sphParams.h,
+//                                       forces.sphParams.k, item_ct1);
+//            });
+//
+//        q_ct1.parallel_for(
+//            sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock),
+//                              sycl::range<3>(1, 1, threadsPerBlock)),
+//            [=](sycl::nd_item<3> item_ct1) {
+//                computePressureViscosityForces(d_particles, numParticles, forces.sphParams.h,
+//                                               forces.sphParams.viscosity, item_ct1);
+//            });
+//
+//        q_ct1.parallel_for(
+//            sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock),
+//                              sycl::range<3>(1, 1, threadsPerBlock)),
+//            [=](sycl::nd_item<3> item_ct1) {
+//                applyGravityForce(d_particles, numParticles, subDeltaTime, forces.gravityParams.gravityForce, item_ct1);
+//            });
+//
+//        q_ct1.parallel_for(
+//            sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock),
+//                              sycl::range<3>(1, 1, threadsPerBlock)),
+//            [=](sycl::nd_item<3> item_ct1) {
+//                applyDamping(d_particles, numParticles, forces.damping, item_ct1);
+//            });
+//
+//        for (int i = 0; i < 4; ++i) {
+//            q_ct1.parallel_for(
+//                sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock),
+//                                  sycl::range<3>(1, 1, threadsPerBlock)),
+//                [=](sycl::nd_item<3> item_ct1) {
+//                    applyCollisions(d_particles, numParticles, windowWidth, windowHeight,
+//                                    forces.collisionParams.restitution, item_ct1);
+//                });
+//        }
+//    }
+//
+//    q_ct1.memcpy(particles, d_particles, numParticles * sizeof(Particle)).wait();
+//    dpct::dpct_free(d_particles, q_ct1);
+//}
 
 void updateParticles_kernels(Particle* particles, int numParticles, float deltaTime, int windowWidth, int windowHeight,
                              Forces forces, int lastMouseX, int lastMouseY) {
-    dpct::device_ext& dev_ct1 = dpct::get_current_device();
-    sycl::queue& q_ct1 = dev_ct1.in_order_queue();
-    Particle* d_particles;
-    cudaMalloc(&d_particles, numParticles * sizeof(Particle));
+    if (!particles || numParticles <= 0) return;
+
+    sycl::queue q_ct1(sycl::gpu_selector_v);
+    Particle* d_particles = sycl::malloc_device<Particle>(numParticles, q_ct1);
+    if (!d_particles) {
+        throw std::runtime_error("Error assigning memory in device.");
+    }
     q_ct1.memcpy(d_particles, particles, numParticles * sizeof(Particle)).wait();
 
-    int threadsPerBlock = 256;
-    int blocksPerGrid = (numParticles + threadsPerBlock - 1) / threadsPerBlock;
+    const int threadsPerBlock =
+        std::min(256, static_cast<int>(q_ct1.get_device().get_info<sycl::info::device::max_work_group_size>()));
+    const int blocksPerGrid = (numParticles + threadsPerBlock - 1) / threadsPerBlock;
 
-    float maxStep = 0.035f;
-    int substeps = (int)ceil(deltaTime / maxStep);
-    float subDeltaTime = deltaTime / substeps;
+    const float maxStep = 0.035f;
+    int substeps = static_cast<int>(std::ceil(deltaTime / maxStep));
+    if (substeps < 1) substeps = 1;
+    const float subDeltaTime = deltaTime / substeps;
 
     for (int step = 0; step < substeps; ++step) {
         // https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics
-        /*
-        DPCT1049:0: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.
-        */
         q_ct1.parallel_for(
             sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock),
                               sycl::range<3>(1, 1, threadsPerBlock)),
@@ -203,9 +272,6 @@ void updateParticles_kernels(Particle* particles, int numParticles, float deltaT
                                        forces.sphParams.k, item_ct1);
             });
 
-        /*
-        DPCT1049:1: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.
-        */
         q_ct1.parallel_for(
             sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock),
                               sycl::range<3>(1, 1, threadsPerBlock)),
@@ -214,9 +280,6 @@ void updateParticles_kernels(Particle* particles, int numParticles, float deltaT
                                                forces.sphParams.viscosity, item_ct1);
             });
 
-        /*
-        DPCT1049:2: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.
-        */
         q_ct1.parallel_for(
             sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock),
                               sycl::range<3>(1, 1, threadsPerBlock)),
@@ -224,20 +287,12 @@ void updateParticles_kernels(Particle* particles, int numParticles, float deltaT
                 applyGravityForce(d_particles, numParticles, subDeltaTime, forces.gravityParams.gravityForce, item_ct1);
             });
 
-        /*
-        DPCT1049:3: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.
-        */
         q_ct1.parallel_for(
             sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock),
                               sycl::range<3>(1, 1, threadsPerBlock)),
-            [=](sycl::nd_item<3> item_ct1) {
-                applyDamping(d_particles, numParticles, forces.damping, item_ct1);
-            });
+            [=](sycl::nd_item<3> item_ct1) { applyDamping(d_particles, numParticles, forces.damping, item_ct1); });
 
         for (int i = 0; i < 4; ++i) {
-            /*
-            DPCT1049:4: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.
-            */
             q_ct1.parallel_for(
                 sycl::nd_range<3>(sycl::range<3>(1, 1, blocksPerGrid) * sycl::range<3>(1, 1, threadsPerBlock),
                                   sycl::range<3>(1, 1, threadsPerBlock)),
@@ -249,5 +304,5 @@ void updateParticles_kernels(Particle* particles, int numParticles, float deltaT
     }
 
     q_ct1.memcpy(particles, d_particles, numParticles * sizeof(Particle)).wait();
-    dpct::dpct_free(d_particles, q_ct1);
+    sycl::free(d_particles, q_ct1);
 }

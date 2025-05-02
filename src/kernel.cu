@@ -172,7 +172,7 @@ __global__ void applyDamping(Particle* particles, int numParticles, float dampin
 
 void updateParticles_kernels(Particle* particles, int numParticles, float deltaTime, int windowWidth, int windowHeight,
                              Forces forces, int lastMouseX, int lastMouseY) {
-    Particle* d_particles;
+    Particle* d_particles = nullptr;
     cudaMalloc(&d_particles, numParticles * sizeof(Particle));
     cudaMemcpy(d_particles, particles, numParticles * sizeof(Particle), cudaMemcpyHostToDevice);
 
